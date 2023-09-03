@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const arg = require('arg');
+const chalk = require('chalk');
 
 try {
     const args = arg({
@@ -8,17 +9,18 @@ try {
     })
     
     if (args['--start']) {
-        console.log('start the app');
+        console.log(chalk.bgCyanBright('start the app'));
     }
     
 } catch (e) {
-    console.log(e.message);
+    console.log(chalk.yellow(e.message));
     console.log();
     usage();
 }
 
 function usage() {
-    console.log(`tool [CMD]
-    --start\tStarts the app
-    --build\tBuilds the app`);
+    console.log(`${chalk.whiteBright('tool [CMD]')}
+    ${chalk.whiteBright('--start\tStarts the app')}
+    ${chalk.whiteBright('--build\tBuilds the app')}
+    `);
 }
