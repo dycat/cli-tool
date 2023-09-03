@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 const arg = require('arg');
 const chalk = require('chalk');
-const pkgUp = require('pkg-up');
+const getConfig = require("../src/config/config-mgr");
+const start = require("../src/commands/start");
 
 try {
     const args = arg({
@@ -10,13 +11,8 @@ try {
     })
     
     if (args['--start']) {
-        const pkgPath = pkgUp.sync({cwd: process.cwd()});
-        const pkg = require(pkgPath);
-        if (pkg.tool) {
-            console.log('Found configuration', pkg.tool);
-        } else {
-            console.log(chalk.yellow('Cound not find configuration, using default'));
-        }
+        const config = getConfig();
+        start(config);
         console.log(chalk.bgCyanBright('start the app'));
     }
     
